@@ -51,8 +51,10 @@ public class WorldDB {
 			String c = scan.nextLine().trim();
 			
 			switch(c) {
-			case "1" -> System.out.println("Jataisa select metode");
-			//selectOp.select(conn, table);
+			case "1" -> {
+			System.out.println("Jataisa select metode");
+			selectOp.select(con, table);
+			}
 			// Turpinajuma bus parejie case
 			case "0" -> back = true;
 			default -> System.out.println();
