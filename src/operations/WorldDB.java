@@ -68,6 +68,7 @@ public class WorldDB {
 			System.out.println("Izveidots savienojums ar datu bazi World!");
 			
 			SelectOperation selectOp = new SelectOperation();
+			ViewManager viewManager = new ViewManager(con, selectOp, scan);
 			//Velak bus vel InsertOperation, DeleteOperation utt.
 			
 			boolean running = true;
@@ -89,8 +90,7 @@ public class WorldDB {
 					}
 				}
 				
-				case "2" ->
-				System.out.println("Bus skati...");
+				case "2" -> viewManager.showViewsMenu();
 				case "0" -> running = false;
 				
 				default -> System.out.println(RED + "Nepareiza izvele!" + RESET);
