@@ -12,6 +12,7 @@ public class InsertOperation {
 				switch(table) {
 					case "city" -> insertCity(con);
 					//Vel vajag country un countrylanguage
+					default -> System.out.println("Neatbalstita tabula: "+table);
 				}
 			}catch(SQLException e) {
 				System.out.println("Insert Kluda: "+e.getMessage());

@@ -38,7 +38,7 @@ public class WorldDB {
 		}
 	}
 	
-	private static void tableMenu(String table, SelectOperation selectOp, InsertOperation insertOp) {
+	private static void tableMenu(String table, SelectOperation selectOp, InsertOperation insertOp, UpdateOperation updateOp) {
 		boolean back = false;
 		while(!back) {
 			System.out.println("\n---" + table.toUpperCase() + "---\n"
@@ -56,6 +56,8 @@ public class WorldDB {
 			
 			case "2" -> insertOp.insert(con, table);
 			
+			case "3" -> updateOp.update(con, table);
+			
 			// Turpinajuma bus parejie case
 			case "0" -> back = true;
 			default -> System.out.println();
@@ -71,6 +73,8 @@ public class WorldDB {
 			SelectOperation selectOp = new SelectOperation();
 			ViewManager viewManager = new ViewManager(con, selectOp, scan);
 			InsertOperation insertOp = new InsertOperation();
+			UpdateOperation updateOp = new UpdateOperation();
+			
 			
 			boolean running = true;
 			
@@ -87,11 +91,13 @@ public class WorldDB {
 				case "1" ->{
 					String table = chooseTable();
 					if(!table.equals("exit")) {
-						tableMenu(table, selectOp, insertOp);
+						tableMenu(table, selectOp, insertOp, updateOp);
 					}
 				}
 				
 				case "2" -> viewManager.showViewsMenu();
+				
+				
 				case "0" -> running = false;
 				
 				default -> System.out.println(RED + "Nepareiza izvele!" + RESET);
