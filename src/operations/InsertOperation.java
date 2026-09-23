@@ -25,24 +25,27 @@ public class InsertOperation {
 	}
 
 		private void insertCountryLanguage(Connection con) throws SQLException{
-			System.out.println("Ievadi pilsetas nosaukumu");
-			String name = scan.nextLine();
+			String IsOfficial;
 			System.out.println("Ievadi valsts kodu (3 simboli");
 			String CountryCode = scan.nextLine();
-			System.out.println("Noradi apgabalu");
-			String district = scan.nextLine();
-			System.out.println("Noradi iedzivotaju skaitu");
-			int population = scan.nextInt();
+			System.out.println("Ievadi valsts valodu");
+			String Language = scan.nextLine();
+			do {
+			System.out.println("Noradi, vai valoda ir oficiala (T/F)");
+			IsOfficial = scan.nextLine();
+			}while(!IsOfficial.equals("T") && !IsOfficial.equals("F"));
+			System.out.println("Noradi runataju procentu");
+			double percentage = scan.nextDouble();
 			scan.nextLine();
 			
-			String sql = "INSERT INTO city (Name, CountryCode, District, Population) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO countrylanguage (CountryCode, Language, IsOfficial, percentage) VALUES (?, ?, ?, ?)";
 			try(PreparedStatement ps = con.prepareStatement(sql)){
-				ps.setString(1, name);
-				ps.setString(2, CountryCode);
-				ps.setString(3, district);
-				ps.setInt(4, population);
+				ps.setString(1, CountryCode);
+				ps.setString(2, Language);
+				ps.setString(3, IsOfficial);
+				ps.setDouble(4, percentage);
 				int rows = ps.executeUpdate();
-				System.out.println("CITY tabula ir ievietotas: "+rows+" rindas");
+				System.out.println("COUNTRY LANGUAGE tabula ir ievietotas: "+rows+" rindas");
 		}
 		}
 		private void insertCountry(Connection con) throws SQLException{
@@ -76,7 +79,7 @@ public class InsertOperation {
 			String HeadOfState = scan.nextLine();
 			System.out.println("Noradi galvaspilsetu");
 			String Capital = scan.nextLine();
-			System.out.println("Noradi otro valsts kodu (3 burti)");
+			System.out.println("Noradi otro valsts kodu (2 burti)");
 			String Code2 = scan.nextLine();
 			
 			String sql = "INSERT INTO country (Name, Code, Continent, Region, SurfaceArea, IndepYear, LifeExpectancy, Population, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
