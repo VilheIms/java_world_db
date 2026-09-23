@@ -34,7 +34,7 @@ public class InsertOperation {
 			System.out.println("Noradi, vai valoda ir oficiala (T/F)");
 			IsOfficial = scan.nextLine();
 			}while(!IsOfficial.equals("T") && !IsOfficial.equals("F"));
-			System.out.println("Noradi runataju procentu");
+			System.out.println("Noradi runataju procentu (BEZ % ZIMES)");
 			double percentage = scan.nextDouble();
 			scan.nextLine();
 			
