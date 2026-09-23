@@ -66,8 +66,10 @@ public class InsertOperation {
 			double GNP = scan.nextDouble();
 			System.out.println("Noradi veco GNP");
 			double GNPOld = scan.nextDouble();
+			scan.nextLine();
 			System.out.println("Noradi vietejo vardu");
 			String LocalName = scan.nextLine();
+			scan.nextLine();
 			System.out.println("Noradi valdibas formu");
 			String GovernmentForm = scan.nextLine();
 			System.out.println("Noradi valsts valdnieku");
@@ -76,16 +78,26 @@ public class InsertOperation {
 			String Capital = scan.nextLine();
 			System.out.println("Noradi otro valsts kodu (3 burti)");
 			String Code2 = scan.nextLine();
-			scan.nextLine();
 			
-			String sql = "INSERT INTO city (Name, CountryCode, District, Population) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO country (Name, Code, Continent, Region, SurfaceArea, IndepYear, LifeExpectancy, Population, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			try(PreparedStatement ps = con.prepareStatement(sql)){
 				ps.setString(1, name);
-				ps.setString(2, CountryCode);
-				ps.setString(3, district);
-				ps.setInt(4, population);
+				ps.setString(2, Code);
+				ps.setString(3, Continent);
+				ps.setString(4, Region);
+				ps.setDouble(5, SurfaceArea);
+				ps.setInt(6, IndepYear);
+				ps.setDouble(7, LifeExpectancy);
+				ps.setInt(8, Population);
+				ps.setDouble(9, GNP);
+				ps.setDouble(10, GNPOld);
+				ps.setString(11, LocalName);
+				ps.setString(12, GovernmentForm);
+				ps.setString(13, HeadOfState);
+				ps.setString(14, Capital);
+				ps.setString(15, Code2);
 				int rows = ps.executeUpdate();
-				System.out.println("CITY tabula ir ievietotas: "+rows+" rindas");
+				System.out.println("COUNTRY tabula ir ievietotas: "+rows+" rindas");
 		}
 		}
 		private void insertCity(Connection con) throws SQLException{
