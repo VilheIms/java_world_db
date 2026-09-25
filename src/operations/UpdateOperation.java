@@ -80,7 +80,7 @@ public class UpdateOperation {
 		String GovernmentForm = scan.nextLine();
 		System.out.println("Noradi valsts valdnieku");
 		String HeadOfState = scan.nextLine();
-		System.out.println("Noradi galvaspilsetu");
+		System.out.println("Noradi galvaspilsetas ID");
 		String Capital = scan.nextLine();
 		System.out.println("Noradi otro valsts kodu (2 burti)");
 		String Code2 = scan.nextLine();
@@ -88,20 +88,20 @@ public class UpdateOperation {
 		String sql = "UPDATE country SET Name = ?, Continent = ?, Region = ?, SurfaceArea = ?, IndepYear = ?, LifeExpectancy = ?, Population = ?, GNP = ?, GNPOld = ?, LocalName = ?, GovernmentForm = ?, HeadOfState = ?, Capital = ?, Code2 = ? WHERE Code = ?;";
 		try(PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setString(1, name);
-			ps.setString(2, Code);
-			ps.setString(3, Continent);
-			ps.setString(4, Region);
-			ps.setDouble(5, SurfaceArea);
-			ps.setInt(6, IndepYear);
-			ps.setDouble(7, LifeExpectancy);
-			ps.setInt(8, Population);
-			ps.setDouble(9, GNP);
-			ps.setDouble(10, GNPOld);
-			ps.setString(11, LocalName);
-			ps.setString(12, GovernmentForm);
-			ps.setString(13, HeadOfState);
-			ps.setString(14, Capital);
-			ps.setString(15, Code2);
+			ps.setString(2, Continent);
+			ps.setString(3, Region);
+			ps.setDouble(4, SurfaceArea);
+			ps.setInt(5, IndepYear);
+			ps.setDouble(6, LifeExpectancy);
+			ps.setInt(7, Population);
+			ps.setDouble(8, GNP);
+			ps.setDouble(9, GNPOld);
+			ps.setString(10, LocalName);
+			ps.setString(11, GovernmentForm);
+			ps.setString(12, HeadOfState);
+			ps.setString(13, Capital);
+			ps.setString(14, Code2);
+			ps.setString(15, Code);
 			int rows = ps.executeUpdate();
 			System.out.println("COUNTRY tabula ir ievietotas: "+rows+" rindas");
 	}
