@@ -28,8 +28,8 @@ public class UpdateOperation {
 		String CountryCode;
 		System.out.println("Kuru pilsetu labot? (noradi ID)");
 		int id = scan.nextInt();
-		scan.nextLine();
-		System.out.println("Noradi pilsetas nosaukumu");
+		String population;
+		System.out.println("Ievadi pilsetas nosaukumu");
 		String name = scan.nextLine();
 		do {
 			System.out.println("Noradi valsts kodu (3 simboli");
@@ -37,8 +37,10 @@ public class UpdateOperation {
 			}while(!CountryCode.matches("^\s*([A-Z]\s*){3}$"));
 		System.out.println("Noradi apgabalu");
 		String district = scan.nextLine();
+		do {
 		System.out.println("Noradi iedzivotaju skaitu");
-		int population = scan.nextInt();
+		population = scan.nextLine();
+		}while(!population.matches("^\\d{0,}.\\d{0,2}$"));
 		scan.nextLine();
 		
 		String sql = "UPDATE city SET Name = ?, CountryCode = ?, District = ?, Population = ? WHERE ID = ?";
@@ -47,7 +49,7 @@ public class UpdateOperation {
 			ps.setString(1, name);
 			ps.setString(2, CountryCode);
 			ps.setString(3, district);
-			ps.setInt(4, population);
+			ps.setString(4, population);
 			ps.setInt(5, id);
 			int rows = ps.executeUpdate();
 			System.out.println("CITY tabula ir atjaunotas: "+rows+" rindas");
@@ -58,13 +60,12 @@ public class UpdateOperation {
 	private void updateCountry(Connection con) throws SQLException{
 		String Code;
 		String Code2;
-		
+		String IndepYear;
 		String SurfaceArea;
 		String LifeExpectancy;
 		String GNP;
 		String GNPOld;
-		
-		
+		String population;
 		
 		System.out.println("Ievadi pilsetas nosaukumu");
 		String name = scan.nextLine();
@@ -80,14 +81,18 @@ public class UpdateOperation {
 		System.out.println("Noradi valsts izmeru");
 		SurfaceArea = scan.nextLine();
 		}while(!SurfaceArea.matches("^\\d{0,}.\\d{0,2}$"));
+		do {
 		System.out.println("Noradi neatkaribas datumu");
-		int IndepYear = scan.nextInt();
+		IndepYear = scan.nextLine();
+		}while(IndepYear.matches("^\\d{0,}$"));
 		do {
 		System.out.println("Noradi videju dzives gadu skaitu");
 		LifeExpectancy = scan.nextLine();
 		}while(!LifeExpectancy.matches("^\\d{0,2}.\\d{0,1}$"));
-		System.out.println("Noradi populaciju");
-		int Population = scan.nextInt();
+		do {
+			System.out.println("Noradi iedzivotaju skaitu");
+			population = scan.nextLine();
+			}while(!population.matches("^\\d{0,}$"));
 		do {
 		System.out.println("Noradi GNP");
 		 GNP = scan.nextLine();
@@ -116,9 +121,9 @@ public class UpdateOperation {
 			ps.setString(2, Continent);
 			ps.setString(3, Region);
 			ps.setString(4, SurfaceArea);
-			ps.setInt(5, IndepYear);
+			ps.setString(5, IndepYear);
 			ps.setString(6, LifeExpectancy);
-			ps.setInt(7, Population);
+			ps.setString(7, population);
 			ps.setString(8, GNP);
 			ps.setString(9, GNPOld);
 			ps.setString(10, LocalName);

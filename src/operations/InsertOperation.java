@@ -55,13 +55,12 @@ public class InsertOperation {
 			
 			String Code;
 			String Code2;
-			
+			String IndepYear;
 			String SurfaceArea;
 			String LifeExpectancy;
 			String GNP;
 			String GNPOld;
-			
-			
+			String population;
 			
 			System.out.println("Ievadi pilsetas nosaukumu");
 			String name = scan.nextLine();
@@ -77,14 +76,18 @@ public class InsertOperation {
 			System.out.println("Noradi valsts izmeru");
 			SurfaceArea = scan.nextLine();
 			}while(!SurfaceArea.matches("^\\d{0,}.\\d{0,2}$"));
+			do {
 			System.out.println("Noradi neatkaribas datumu");
-			int IndepYear = scan.nextInt();
+			IndepYear = scan.nextLine();
+			}while(IndepYear.matches("^\\d{0,}$"));
 			do {
 			System.out.println("Noradi videju dzives gadu skaitu");
 			LifeExpectancy = scan.nextLine();
 			}while(!LifeExpectancy.matches("^\\d{0,2}.\\d{0,1}$"));
-			System.out.println("Noradi populaciju");
-			int Population = scan.nextInt();
+			do {
+				System.out.println("Noradi iedzivotaju skaitu");
+				population = scan.nextLine();
+				}while(!population.matches("^\\d{0,}$"));
 			do {
 			System.out.println("Noradi GNP");
 			 GNP = scan.nextLine();
@@ -114,9 +117,9 @@ public class InsertOperation {
 				ps.setString(3, Continent);
 				ps.setString(4, Region);
 				ps.setString(5, SurfaceArea);
-				ps.setInt(6, IndepYear);
+				ps.setString(6, IndepYear);
 				ps.setString(7, LifeExpectancy);
-				ps.setInt(8, Population);
+				ps.setString(8, population);
 				ps.setString(9, GNP);
 				ps.setString(10, GNPOld);
 				ps.setString(11, LocalName);
@@ -130,6 +133,7 @@ public class InsertOperation {
 		}
 		private void insertCity(Connection con) throws SQLException{
 			String CountryCode;
+			String population;
 			System.out.println("Ievadi pilsetas nosaukumu");
 			String name = scan.nextLine();
 			do {
@@ -138,8 +142,10 @@ public class InsertOperation {
 				}while(!CountryCode.matches("^\s*([A-Z]\s*){3}$"));
 			System.out.println("Noradi apgabalu");
 			String district = scan.nextLine();
+			do {
 			System.out.println("Noradi iedzivotaju skaitu");
-			int population = scan.nextInt();
+			population = scan.nextLine();
+			}while(!population.matches("^\\d{0,}.\\d{0,2}$"));
 			scan.nextLine();
 			
 			String sql = "INSERT INTO city (Name, CountryCode, District, Population) VALUES (?, ?, ?, ?)";
@@ -147,7 +153,7 @@ public class InsertOperation {
 				ps.setString(1, name);
 				ps.setString(2, CountryCode);
 				ps.setString(3, district);
-				ps.setInt(4, population);
+				ps.setString(4, population);
 				int rows = ps.executeUpdate();
 				System.out.println("CITY tabula ir ievietotas: "+rows+" rindas");
 			}
