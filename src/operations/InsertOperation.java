@@ -56,6 +56,13 @@ public class InsertOperation {
 			String Code;
 			String Code2;
 			
+			String SurfaceArea;
+			String LifeExpectancy;
+			String GNP;
+			String GNPOld;
+			
+			
+			
 			System.out.println("Ievadi pilsetas nosaukumu");
 			String name = scan.nextLine();
 			do {
@@ -66,27 +73,34 @@ public class InsertOperation {
 			String Continent = scan.nextLine();
 			System.out.println("Noradi regionu");
 			String Region = scan.nextLine();
+			do {
 			System.out.println("Noradi valsts izmeru");
-			double SurfaceArea = scan.nextDouble();
+			SurfaceArea = scan.nextLine();
+			}while(!SurfaceArea.matches("^\\d{0,}.\\d{0,2}$"));
 			System.out.println("Noradi neatkaribas datumu");
 			int IndepYear = scan.nextInt();
+			do {
 			System.out.println("Noradi videju dzives gadu skaitu");
-			double LifeExpectancy = scan.nextDouble();
+			LifeExpectancy = scan.nextLine();
+			}while(!LifeExpectancy.matches("^\\d{0,2}.\\d{0,1}$"));
 			System.out.println("Noradi populaciju");
 			int Population = scan.nextInt();
+			do {
 			System.out.println("Noradi GNP");
-			double GNP = scan.nextDouble();
+			 GNP = scan.nextLine();
+			}while(!SurfaceArea.matches("^\\d{0,}.\\d{0,2}$"));
+			do {
 			System.out.println("Noradi veco GNP");
-			double GNPOld = scan.nextDouble();
+			 GNPOld = scan.nextLine();
+			}while(!SurfaceArea.matches("^\\d{0,}.\\d{0,2}$"));
 			scan.nextLine();
 			System.out.println("Noradi vietejo vardu");
 			String LocalName = scan.nextLine();
-			scan.nextLine();
 			System.out.println("Noradi valdibas formu");
 			String GovernmentForm = scan.nextLine();
 			System.out.println("Noradi valsts valdnieku");
 			String HeadOfState = scan.nextLine();
-			System.out.println("Noradi galvaspilsetu");
+			System.out.println("Noradi galvaspilsetas ID");
 			String Capital = scan.nextLine();
 			do {
 			System.out.println("Noradi otro valsts kodu (2 burti)");
@@ -99,12 +113,12 @@ public class InsertOperation {
 				ps.setString(2, Code);
 				ps.setString(3, Continent);
 				ps.setString(4, Region);
-				ps.setDouble(5, SurfaceArea);
+				ps.setString(5, SurfaceArea);
 				ps.setInt(6, IndepYear);
-				ps.setDouble(7, LifeExpectancy);
+				ps.setString(7, LifeExpectancy);
 				ps.setInt(8, Population);
-				ps.setDouble(9, GNP);
-				ps.setDouble(10, GNPOld);
+				ps.setString(9, GNP);
+				ps.setString(10, GNPOld);
 				ps.setString(11, LocalName);
 				ps.setString(12, GovernmentForm);
 				ps.setString(13, HeadOfState);

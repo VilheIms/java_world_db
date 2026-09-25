@@ -56,9 +56,15 @@ public class UpdateOperation {
 	}
 	
 	private void updateCountry(Connection con) throws SQLException{
-
 		String Code;
 		String Code2;
+		
+		String SurfaceArea;
+		String LifeExpectancy;
+		String GNP;
+		String GNPOld;
+		
+		
 		
 		System.out.println("Ievadi pilsetas nosaukumu");
 		String name = scan.nextLine();
@@ -70,27 +76,34 @@ public class UpdateOperation {
 		String Continent = scan.nextLine();
 		System.out.println("Noradi regionu");
 		String Region = scan.nextLine();
+		do {
 		System.out.println("Noradi valsts izmeru");
-		double SurfaceArea = scan.nextDouble();
+		SurfaceArea = scan.nextLine();
+		}while(!SurfaceArea.matches("^\\d{0,}.\\d{0,2}$"));
 		System.out.println("Noradi neatkaribas datumu");
 		int IndepYear = scan.nextInt();
+		do {
 		System.out.println("Noradi videju dzives gadu skaitu");
-		double LifeExpectancy = scan.nextDouble();
+		LifeExpectancy = scan.nextLine();
+		}while(!LifeExpectancy.matches("^\\d{0,2}.\\d{0,1}$"));
 		System.out.println("Noradi populaciju");
 		int Population = scan.nextInt();
+		do {
 		System.out.println("Noradi GNP");
-		double GNP = scan.nextDouble();
+		 GNP = scan.nextLine();
+		}while(!SurfaceArea.matches("^\\d{0,}.\\d{0,2}$"));
+		do {
 		System.out.println("Noradi veco GNP");
-		double GNPOld = scan.nextDouble();
+		 GNPOld = scan.nextLine();
+		}while(!SurfaceArea.matches("^\\d{0,}.\\d{0,2}$"));
 		scan.nextLine();
 		System.out.println("Noradi vietejo vardu");
 		String LocalName = scan.nextLine();
-		scan.nextLine();
 		System.out.println("Noradi valdibas formu");
 		String GovernmentForm = scan.nextLine();
 		System.out.println("Noradi valsts valdnieku");
 		String HeadOfState = scan.nextLine();
-		System.out.println("Noradi galvaspilsetu");
+		System.out.println("Noradi galvaspilsetas ID");
 		String Capital = scan.nextLine();
 		do {
 		System.out.println("Noradi otro valsts kodu (2 burti)");
@@ -102,12 +115,12 @@ public class UpdateOperation {
 			ps.setString(1, name);
 			ps.setString(2, Continent);
 			ps.setString(3, Region);
-			ps.setDouble(4, SurfaceArea);
+			ps.setString(4, SurfaceArea);
 			ps.setInt(5, IndepYear);
-			ps.setDouble(6, LifeExpectancy);
+			ps.setString(6, LifeExpectancy);
 			ps.setInt(7, Population);
-			ps.setDouble(8, GNP);
-			ps.setDouble(9, GNPOld);
+			ps.setString(8, GNP);
+			ps.setString(9, GNPOld);
 			ps.setString(10, LocalName);
 			ps.setString(11, GovernmentForm);
 			ps.setString(12, HeadOfState);
@@ -142,7 +155,7 @@ public class UpdateOperation {
 			ps.setString(3, IsOfficial);
 			ps.setString(4, CountryCode);
 			int rows = ps.executeUpdate();
-			System.out.println("CITY tabula ir ievietotas: "+rows+" rindas");
+			System.out.println("COUNTRY LANGUAGE tabula ir ievietotas: "+rows+" rindas");
 		}
 	}
 }
