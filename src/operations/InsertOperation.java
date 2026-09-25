@@ -146,7 +146,6 @@ public class InsertOperation {
 			System.out.println("Noradi iedzivotaju skaitu");
 			population = scan.nextLine();
 			}while(!population.matches("^\\d{0,}.\\d{0,2}$"));
-			scan.nextLine();
 			
 			String sql = "INSERT INTO city (Name, CountryCode, District, Population) VALUES (?, ?, ?, ?)";
 			try(PreparedStatement ps = con.prepareStatement(sql)){

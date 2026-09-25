@@ -41,7 +41,6 @@ public class UpdateOperation {
 		System.out.println("Noradi iedzivotaju skaitu");
 		population = scan.nextLine();
 		}while(!population.matches("^\\d{0,}.\\d{0,2}$"));
-		scan.nextLine();
 		
 		String sql = "UPDATE city SET Name = ?, CountryCode = ?, District = ?, Population = ? WHERE ID = ?";
 		
