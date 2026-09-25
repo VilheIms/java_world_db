@@ -34,7 +34,7 @@ public class UpdateOperation {
 		do {
 			System.out.println("Noradi valsts kodu (3 simboli");
 			CountryCode = scan.nextLine();
-			}while(CountryCode == null || CountryCode.chars().anyMatch(Character::isDigit) || CountryCode.length() > 3 || CountryCode.length() < 3);
+			}while(!CountryCode.matches("^\s*([A-Z]\s*){3}$"));
 		System.out.println("Noradi apgabalu");
 		String district = scan.nextLine();
 		System.out.println("Noradi iedzivotaju skaitu");
@@ -56,10 +56,16 @@ public class UpdateOperation {
 	}
 	
 	private void updateCountry(Connection con) throws SQLException{
-		System.out.println("Ievadi valsts nosaukumu");
+
+		String Code;
+		String Code2;
+		
+		System.out.println("Ievadi pilsetas nosaukumu");
 		String name = scan.nextLine();
-		System.out.println("Ievadi valsts kodu (3 simboli");
-		String Code = scan.nextLine();
+		do {
+			System.out.println("Noradi valsts kodu (3 simboli");
+			Code = scan.nextLine();
+			}while(!Code.matches("^\s*([A-Z]\s*){3}$"));
 		System.out.println("Noradi kontinentu");
 		String Continent = scan.nextLine();
 		System.out.println("Noradi regionu");
@@ -79,14 +85,17 @@ public class UpdateOperation {
 		scan.nextLine();
 		System.out.println("Noradi vietejo vardu");
 		String LocalName = scan.nextLine();
+		scan.nextLine();
 		System.out.println("Noradi valdibas formu");
 		String GovernmentForm = scan.nextLine();
 		System.out.println("Noradi valsts valdnieku");
 		String HeadOfState = scan.nextLine();
-		System.out.println("Noradi galvaspilsetas ID");
+		System.out.println("Noradi galvaspilsetu");
 		String Capital = scan.nextLine();
+		do {
 		System.out.println("Noradi otro valsts kodu (2 burti)");
-		String Code2 = scan.nextLine();
+		Code2 = scan.nextLine();
+	}while(!Code2.matches("^\s*([A-Z]\s*){2}$"));
 		
 		String sql = "UPDATE country SET Name = ?, Continent = ?, Region = ?, SurfaceArea = ?, IndepYear = ?, LifeExpectancy = ?, Population = ?, GNP = ?, GNPOld = ?, LocalName = ?, GovernmentForm = ?, HeadOfState = ?, Capital = ?, Code2 = ? WHERE Code = ?;";
 		try(PreparedStatement ps = con.prepareStatement(sql)){
@@ -110,23 +119,28 @@ public class UpdateOperation {
 	}
 	}
 	private void updateCountryLanguage(Connection con) throws SQLException{
-		//Trukst ievades datu parbaude
-		System.out.println("Ievadi pilsetas nosaukumu");
-		String name = scan.nextLine();
-		System.out.println("Ievadi valsts kodu (3 simboli");
-		String CountryCode = scan.nextLine();
-		System.out.println("Noradi apgabalu");
-		String district = scan.nextLine();
-		System.out.println("Noradi iedzivotaju skaitu");
-		int population = scan.nextInt();
+		String IsOfficial;
+		String CountryCode;
+		do {
+			System.out.println("Noradi valsts kodu (3 simboli");
+			CountryCode = scan.nextLine();
+			}while(!CountryCode.matches("^\s*([A-Z]\s*){3}$"));
+		System.out.println("Ievadi valsts valodu");
+		String Language = scan.nextLine();
+		do {
+		System.out.println("Noradi, vai valoda ir oficiala (T/F)");
+		IsOfficial = scan.nextLine();
+		}while(!IsOfficial.equals("T") && !IsOfficial.equals("F"));
+		System.out.println("Noradi runataju procentu (BEZ % ZIMES)");
+		double percentage = scan.nextDouble();
 		scan.nextLine();
 		
-		String sql = "INSERT INTO countrylanguage (CountryCode, Language, IsOfficial, Percentage) VALUES (?, ?, ?, ?)";
+		String sql = "UPDATE countrylanguage Percentage = ?, Language = ?, IsOffical = ? WHERE CountryCode = ?";
 		try(PreparedStatement ps = con.prepareStatement(sql)){
-			ps.setString(1, name);
-			ps.setString(2, CountryCode);
-			ps.setString(3, district);
-			ps.setInt(4, population);
+			ps.setDouble(1, percentage);
+			ps.setString(2, Language);
+			ps.setString(3, IsOfficial);
+			ps.setString(4, CountryCode);
 			int rows = ps.executeUpdate();
 			System.out.println("CITY tabula ir ievietotas: "+rows+" rindas");
 		}
