@@ -7,7 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SelectOperation {
+	
+	static final String GREEN = "\u001B[32m";
+	static final String RED = "\u001B[31m";
+	static final String RESET = "\u001B[0m";
+	
 	public void select(Connection con, String tableOrView) {
+		
 		String sql = "SELECT * FROM " + tableOrView;
 		try(Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery(sql)){
@@ -17,6 +23,9 @@ public class SelectOperation {
 			int colWidth = 30;
 			
 			for(int i = 1; i <= colCount; i++) {
+				
+				
+				
 				System.out.printf("%-" + colWidth + "s", meta.getColumnName(i));
 			}
 			
@@ -24,7 +33,12 @@ public class SelectOperation {
 			
 			System.out.println("_".repeat(colCount * colWidth));
 			
+			int rowIndex = 1;
+			
 			while(rs.next()) {
+				
+				String rowColor = (rowIndex % 2 != 0) ? GREEN : RED; 
+				System.out.print(rowColor);
 				
 				for(int i = 1; i <= colCount; i++) {
 					String value = rs.getString(i);
@@ -38,7 +52,12 @@ public class SelectOperation {
 					String formattedValue = String.format("%-" + colWidth + "s", value);
 					System.out.print(formattedValue);
 					}
-			System.out.println();
+				
+				System.out.print(RESET);
+				System.out.println();
+				
+				rowIndex++;
+			
 			}
 			
 		}catch(SQLException e) {

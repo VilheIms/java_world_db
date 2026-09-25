@@ -48,10 +48,16 @@ public class InsertOperation {
 		}
 		}
 		private void insertCountry(Connection con) throws SQLException{
+			
+			String Code;
+			String Code2;
+			
 			System.out.println("Ievadi pilsetas nosaukumu");
 			String name = scan.nextLine();
-			System.out.println("Ievadi valsts kodu (3 simboli");
-			String Code = scan.nextLine();
+			do {
+				System.out.println("Noradi valsts kodu (3 simboli");
+				Code = scan.nextLine();
+				}while(Code == null || Code.chars().anyMatch(Character::isDigit) || Code.length() > 3 || Code.length() < 3);
 			System.out.println("Noradi kontinentu");
 			String Continent = scan.nextLine();
 			System.out.println("Noradi regionu");
@@ -78,8 +84,10 @@ public class InsertOperation {
 			String HeadOfState = scan.nextLine();
 			System.out.println("Noradi galvaspilsetu");
 			String Capital = scan.nextLine();
+			do {
 			System.out.println("Noradi otro valsts kodu (2 burti)");
-			String Code2 = scan.nextLine();
+			Code2 = scan.nextLine();
+		}while(Code2 == null || Code2.chars().anyMatch(Character::isDigit) || Code2.length() > 2 || Code2.length() < 2);
 			
 			String sql = "INSERT INTO country (Name, Code, Continent, Region, SurfaceArea, IndepYear, LifeExpectancy, Population, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			try(PreparedStatement ps = con.prepareStatement(sql)){
@@ -103,11 +111,13 @@ public class InsertOperation {
 		}
 		}
 		private void insertCity(Connection con) throws SQLException{
-			//Trukst ievades datu parbaude
+			String CountryCode;
 			System.out.println("Ievadi pilsetas nosaukumu");
 			String name = scan.nextLine();
-			System.out.println("Ievadi valsts kodu (3 simboli");
-			String CountryCode = scan.nextLine();
+			do {
+				System.out.println("Noradi valsts kodu (3 simboli");
+				CountryCode = scan.nextLine();
+				}while(CountryCode == null || CountryCode.chars().anyMatch(Character::isDigit) || CountryCode.length() > 3 || CountryCode.length() < 3);
 			System.out.println("Noradi apgabalu");
 			String district = scan.nextLine();
 			System.out.println("Noradi iedzivotaju skaitu");

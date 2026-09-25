@@ -25,13 +25,16 @@ public class UpdateOperation {
 	}
 
 	private void updateCity(Connection con) throws SQLException{
+		String CountryCode;
 		System.out.println("Kuru pilsetu labot? (noradi ID)");
 		int id = scan.nextInt();
 		scan.nextLine();
 		System.out.println("Noradi pilsetas nosaukumu");
 		String name = scan.nextLine();
-		System.out.println("Noradi valsts kodu (3 simboli");
-		String CountryCode = scan.nextLine();
+		do {
+			System.out.println("Noradi valsts kodu (3 simboli");
+			CountryCode = scan.nextLine();
+			}while(CountryCode == null || CountryCode.chars().anyMatch(Character::isDigit) || CountryCode.length() > 3 || CountryCode.length() < 3);
 		System.out.println("Noradi apgabalu");
 		String district = scan.nextLine();
 		System.out.println("Noradi iedzivotaju skaitu");
