@@ -12,7 +12,6 @@ public class DeleteOperation {
 		try {
 			switch(table) {
 			case "city" -> deleteCity(con);
-			// country un language VAJAG
 			
 			case "country" -> deleteCountry(con);
 			

@@ -11,7 +11,6 @@ public class InsertOperation {
 			try {
 				switch(table) {
 					case "city" -> insertCity(con);
-					//Vel vajag country un countrylanguage
 					
 					case "country" -> insertCountry(con);
 					
